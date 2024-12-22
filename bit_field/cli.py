@@ -33,6 +33,7 @@ def bit_field_cli():
     parser.add_argument('--vflip', help='vertical flip', action='store_true')
     parser.add_argument('--trim', help='trim long bitfield names', type=float)
     parser.add_argument('--uneven', help='uneven lanes', action='store_true')
+    parser.add_argument('--offset', help='offset the index lanes', default=0)
     parser.add_argument('--legend', help='legend item', action='append', nargs=2, metavar=('NAME', 'TYPE'))
     args = parser.parse_args()
 
@@ -63,6 +64,7 @@ def bit_field_cli():
                      strokewidth=args.strokewidth,
                      trim=args.trim,
                      uneven=args.uneven,
+                     offset=args.offset,
                      legend={key: value for key, value in args.legend} if args.legend else None)
 
     res = jsonml_stringify(res)
