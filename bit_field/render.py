@@ -42,6 +42,7 @@ class Renderer(object):
                  strokewidth=1,
                  trim=None,
                  uneven=False,
+                 offset=0,
                  legend=None):
         if vspace <= 19:
             raise ValueError(
@@ -71,6 +72,7 @@ class Renderer(object):
         self.stroke_width = strokewidth
         self.trim_char_width = trim
         self.uneven = uneven
+        self.offset = offset
         self.legend = legend
 
     def get_total_bits(self, desc):
@@ -81,8 +83,8 @@ class Renderer(object):
 
         mod = (self.bits + self.lanes - 1) // self.lanes
         self.mod = mod
-        lsb = 0
-        msb = self.bits - 1
+        lsb = 0 + self.offset
+        msb = self.bits +self.offset - 1
         for e in desc:
             e['lsb'] = lsb
             lsb += e['bits']
